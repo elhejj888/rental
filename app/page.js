@@ -12,6 +12,7 @@ import CarouselComponent from '../components/sections/Carousel';
 import Services from '../components/sections/Services';
 import Testimonials from '../components/sections/Testimonials';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import CarCarousel from '../components/sections/CarCarousel';
 import '../app/globals.css';
 
 
@@ -26,7 +27,7 @@ const SectionWrapper = ({ children, id }) => {
       id={id}
       className={`transition-opacity duration-1000 ease-in-out ${
         inView ? 'opacity-100' : 'opacity-0'
-      }`}
+      } max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8`} // Added responsiveness
     >
       {children}
     </section>
@@ -62,6 +63,9 @@ const Home = () => {
         <main className="flex-grow p-4 space-y-12">
           <SectionWrapper id="mission">
             <Mission />
+          </SectionWrapper>
+          <SectionWrapper id="car-carousel">
+            <CarCarousel />
           </SectionWrapper>
           <SectionWrapper id="about-us">
             <AboutUs />

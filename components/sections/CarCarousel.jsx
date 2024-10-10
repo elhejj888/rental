@@ -73,7 +73,7 @@ const CarCarousel = () => {
   };
 
   return (
-    <div className="relative bg-white shadow-lg rounded-lg py-10 mx-auto w-[1000px]">
+    <div className="relative bg-white shadow-lg rounded-lg py-10 mx-auto w-full">
       {/* Title */}
       <h2 className="text-4xl font-bold text-center text-black mb-8">Our Cars</h2>
 
@@ -112,7 +112,7 @@ const CarCarousel = () => {
 
       {/* Link to show all cars */}
       <div className="mt-8 text-center">
-        <Link className="text-gray-600 font-bold hover:underline" href="/Cars">
+        <Link className="text-gray-600 font-bold hover:underline" href="/Car">
           Show All Cars
         </Link>
       </div>
