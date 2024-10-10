@@ -16,7 +16,7 @@ const AboutUs = () => {
   We are a forward-thinking company dedicated to transforming the car rental industry through the use of cutting-edge technology. Our aim is to provide secure, efficient, and reliable rental solutions that meet the evolving needs of our customers in the digital age.
 </p>
 <p className="text-gray-700">
-  With a team of experienced professionals, we strive to offer top-tier services that are both accessible and trustworthy. Whether you're renting for personal use or business travel, we are here to ensure a seamless experience every step of the way.
+  With a team of experienced professionals, we strive to offer top-tier services that are both accessible and trustworthy. Whether you&#39;re renting for personal use or business travel, we are here to ensure a seamless experience every step of the way.
 </p>
       </div>
     </section>
