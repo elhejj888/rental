@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 
 // Sample car data
 const carData = [
@@ -15,12 +16,16 @@ const carData = [
   // Add more cars if needed
 ];
 
+
+
 const CarCard = ({ car }) => (
-  <div className="min-w-[300px] bg-white shadow-lg rounded-lg overflow-hidden mx-4">
-    <img src={car.image} alt={car.name} className="h-40 w-full object-cover" />
-    <div className="p-4">
-      <h3 className="font-bold text-lg">{car.name}</h3>
-      <p className="text-gray-600">{car.price}</p>
+  <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden p-4 border-2 border-gray-200 ">
+    <img src={car.image} alt={car.name} className="h-40 w-full object-cover border-2 border-gray-100 rounded-md shadow-lg" />
+    <div className="mt-4 flex shadow-xl py-4 px-2 border-2 border-gray-100 rounded-md">
+      <div className="w-1/2">
+        <h3 className="font-bold text-lg text-orange-600 border-b-2 border-gray-200">{car.name}</h3>
+        <p className="text-gray-600">{car.price} MAD</p>
+      </div>
     </div>
   </div>
 );
@@ -30,6 +35,27 @@ const CarCarousel = () => {
   const [isAtStart, setIsAtStart] = useState(true); // State to track if at the start
   const [isAtEnd, setIsAtEnd] = useState(false);    // State to track if at the end
 
+  const [cars, setCars] = useState([]);
+
+const getData = async () => {
+  try {
+    const response = await axios.get('/api/cars');
+    setCars(response.data);
+  } catch (error) {
+    console.error('Error inserting car:', error);
+  }
+};
+useEffect(() => {
+  getData();
+
+  // Set up an interval to call getData every 5 minutes (300,000 milliseconds)
+  const interval = setInterval(() => {
+    getData();
+  }, 300000); // 5 minutes in milliseconds
+
+  // Clean up the interval when the component unmounts
+  return () => clearInterval(interval);}
+, []);
   // Auto-scroll the carousel
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,10 +108,10 @@ const CarCarousel = () => {
         <div
           ref={carouselRef}
           onScroll={handleScroll}
-          className="flex overflow-hidden w-[900px] space-x-4 no-scrollbar"
+          className="flex overflow-hidden w-[900px] space-x-4 no-scrollbar p-6 rouned-md"
           style={{ scrollSnapType: 'x mandatory' }}
         >
-          {carData.map((car) => (
+          {cars.map((car) => (
             <CarCard key={car.id} car={car} />
           ))}
         </div>
