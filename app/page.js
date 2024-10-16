@@ -21,6 +21,8 @@ const SectionWrapper = ({ children, id }) => {
     threshold: 0.1,
   });
 
+  
+
   return (
     <section
       ref={setRef}
@@ -36,7 +38,7 @@ const SectionWrapper = ({ children, id }) => {
 
 const Home = () => {
   const [showNavbar, setShowNavbar] = useState(false);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const carouselHeight = document.getElementById('carousel').clientHeight;
@@ -46,7 +48,6 @@ const Home = () => {
         setShowNavbar(false);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);

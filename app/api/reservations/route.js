@@ -4,6 +4,7 @@ import prisma from '../../lib/prisma';
 // Handle POST request
 export async function POST(req) {
   const { carType, carModel, dateFrom, dateTo, pickUpTime, returnTime, phoneNumber, name, email } = await req.json();
+  
 
   try {
     const reservation = await prisma.reservation.create({
@@ -23,7 +24,7 @@ export async function POST(req) {
     return new Response(JSON.stringify(reservation), { status: 201 });
   } catch (error) {
     console.error('Error creating reservation:', error); // Log the error message
-    return new Response(JSON.stringify({ error: 'Failed to create reservation' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Failed to create reservation'+error }), { status: 500 });
   }
 }
 

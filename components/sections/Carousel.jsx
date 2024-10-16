@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import Link from 'next/link';
 import Alert from '../common/Alert';
 import { useEffect } from 'react';
+import { json } from 'react-router-dom';
+import axios from 'axios';
 
 const HeroSection = () => {
+  const [cars, setCars] = useState([]);
   const [reservationData, setReservationData] = useState({
     name: '',
     phoneNumber: '',
@@ -19,7 +22,9 @@ const HeroSection = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('success');
   const [alertTitle, setAlertTitle] = useState('Success');
-
+  const [alertRefresher, setAlertRefresher] = useState(false);
+  console.log(cars);
+  console.log(cars);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReservationData({ ...reservationData, [name]: value });
@@ -27,6 +32,20 @@ const HeroSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const dateFrom = new Date(reservationData.dateFrom); // Parse the start date
+  const dateTo = new Date(reservationData.dateTo);     // Parse the end date
+  const today = new Date();                            // Get today's date
+  
+  // Check if the dates are valid before proceeding
+  if (isNaN(dateFrom) || isNaN(dateTo) || dateFrom < today || dateTo < dateFrom) {
+
+    setAlertMessage('Invalid date input , Please be Sure that the date is After Today and the end date is after the start date..!');
+    setAlertType('alert');
+    setAlertTitle('Reservation Error');
+    setShowAlert(true);
+    setAlertRefresher(false);
+    return;
+  }
     try {
       const response = await fetch('/api/reservations', {
         method: 'POST',
@@ -43,13 +62,39 @@ const HeroSection = () => {
       setShowAlert(true);
       setAlertMessage('Reservation created successfully');
       setAlertType('success');
-      setAlertTitle('Success');
+      setAlertTitle('Reservation Successfull');
+      setAlertRefresher(true);
+
       const reservation = await response.json();
       console.log('Reservation created:', reservation);
     } catch (error) {
-      console.error('Error creating reservation:', error);
+      setAlertMessage('Error creating reservation:'+ error);
+      setAlertType('error');
+      setAlertTitle('Reservation Error');
+      setShowAlert(true);
+      setAlertRefresher(false);
     }
   };
+
+  const getData = async () => {
+    try {
+      const response = await axios.get('/api/cars');
+      setCars(response.data);
+    } catch (error) {
+      console.error('Error inserting car:', error);
+    }
+  };
+  useEffect(() => {
+    getData();
+
+    // Set up an interval to call getData every 5 minutes (300,000 milliseconds)
+    const interval = setInterval(() => {
+      getData();
+    }, 300000); // 5 minutes in milliseconds
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval);}
+  , []);
 
   return (
     <div className="scroll-smooth relative h-screen bg-[url('https://www.shutterstock.com/image-photo/cars-parked-row-on-outdoor-600nw-1378241768.jpg')] bg-cover">
@@ -146,7 +191,7 @@ const HeroSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col space-y-2">
-              <label className="text-gray-700 font-semibold">Car Type</label>
+              <label className="text-gray-700 font-semibold">Car Brand</label>
               <select
                 name="carType"
                 value={reservationData.carType}
@@ -154,10 +199,13 @@ const HeroSection = () => {
                 className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 required
               >
-                <option value="" disabled>Select Car Type</option>
-                <option value="Sedan">Sedan</option>
-                <option value="SUV">SUV</option>
-                <option value="Sports Car">Sports Car</option>
+                <option value="" disabled>Select Car Brand</option>
+
+                {cars.map((car) => (
+                  <option key={car.id} value={car.marque}>
+                    {car.marque}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -171,9 +219,11 @@ const HeroSection = () => {
                 required
               >
                 <option value="" disabled>Select Car Model</option>
-                <option value="Model A">Model A</option>
-                <option value="Model B">Model B</option>
-                <option value="Model C">Model C</option>
+                {cars.map((car) => (
+                  <option key={car.id} value={car.modele}>
+                    {car.modele}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -218,6 +268,7 @@ const HeroSection = () => {
         isOpen={showAlert}
         onClose={() => setShowAlert(false)}
         type={alertType}
+        refresh={alertRefresher}
       />
     </div>
   );
