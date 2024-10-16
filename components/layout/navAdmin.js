@@ -6,11 +6,11 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link'
 const NavAdmin = () => {
     const { data: session, status } = useSession();
-    // useEffect(() => {
-    //     if (status === "unauthenticated") {
-    //         redirect('/signin');
-    //     }
-    // }, [status]);
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            redirect('/signin');
+        }
+    }, [status]);
 
     if (status === "loading") {
         return <div>Loading...</div>;
