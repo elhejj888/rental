@@ -4,18 +4,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-// Sample car data
-const carData = [
-  { id: 1, name: 'Audi Q5', image: 'https://www.gtspeed.ma/storage/voitures/May2022/W1WMLUXfJkMPqtt0POds.jpeg', price: '250/day' },
-  { id: 2, name: 'Peugeot 3008', image: 'https://visuel3d-secure.peugeot.com/V3DImage.ashx?client=CFGAP3D&mkt=AT&env=PROD&version=1PPDSYRJH7C0A0B0&ratio=1&format=jpg&quality=90&width=640&view=001&color=0MM00NDP&trim=0PW60RFX&opt1=ZHQM&back=0', price: '300/day' },
-  { id: 3, name: 'Citroen C4', image: 'https://visuel3d-secure.citroen.com/V3DImage.ashx?client=DI1&version=1CLEA5HMK1EEA020&color=0MM00N9V&width=360&ratio=1&view=001&format=jpg&quality=90', price: '350/day' },
-  { id: 4, name: 'Dacia Sandero', image: 'https://dacia.renaultmotors.be/wp-content/uploads/sites/79/2022/06/packshot-sandero-nbi.png', price: '200/day' },
-  { id: 5, name: 'Fiat Tipo', image: 'https://staging-www.fiat.ma/content/dam/fiat/com/my23/tipo/colorizer/tipo-hb/gelato-white/Tipo-Sedan_680x430px-(1).png', price: '180/day' },
-  { id: 6, name: 'Renault Megane 4', image: 'https://img.goodfon.com/wallpaper/big/5/d0/renault-estate-gt-line-worldwide.webp', price: '250/day' },
-
-  // Add more cars if needed
-];
-
 
 
 const CarCard = ({ car }) => (
