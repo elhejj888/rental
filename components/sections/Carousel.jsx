@@ -23,8 +23,7 @@ const HeroSection = () => {
   const [alertType, setAlertType] = useState('success');
   const [alertTitle, setAlertTitle] = useState('Success');
   const [alertRefresher, setAlertRefresher] = useState(false);
-  console.log(cars);
-  console.log(cars);
+  const whatsappMessage = "hi, can i have more information about renting cars please";
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReservationData({ ...reservationData, [name]: value });
@@ -111,9 +110,9 @@ const HeroSection = () => {
               Our Offers
             </button>
           </Link>
-          <Link href="#contact-us">
-            <button className="bg-white font-bold text-yellow-600 px-6 py-3 rounded-full shadow-md hover:bg-gray-200 transition duration-300">
-              Contact Us
+          <Link href={`https://wa.me/+212663635296?text=${whatsappMessage}`} target="_blank">
+            <button className="bg-white font-bold text-green-600 px-6 py-3 rounded-full shadow-md hover:bg-gray-200 transition duration-300">
+              Whatsapp Message
             </button>
           </Link>
         </div>

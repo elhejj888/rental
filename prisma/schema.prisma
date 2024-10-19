@@ -46,3 +46,12 @@ model User {
   firstName   String
   lastName    String
 }
+
+model message {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @default(now())
+  name        String
+  email       String
+  phoneNumber String
+  message     String
+}
