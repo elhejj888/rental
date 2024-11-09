@@ -12,10 +12,10 @@ const AboutUs = () => {
       </div>
       <div className="md:w-2/3">
         <h2 className="text-3xl mb-4 text-yellow-600 font-bold shadow-lg border-b-2 border-b-yellow-600 text-center md:text-left">About Us</h2>
-        <p className="text-gray-700 mb-4">
+        <p className="text-gray-700 mb-4 text-justify">
   We are a forward-thinking company dedicated to transforming the car rental industry through the use of cutting-edge technology. Our aim is to provide secure, efficient, and reliable rental solutions that meet the evolving needs of our customers in the digital age.
 </p>
-<p className="text-gray-700">
+<p className="text-gray-700 text-justify">
   With a team of experienced professionals, we strive to offer top-tier services that are both accessible and trustworthy. Whether you&#39;re renting for personal use or business travel, we are here to ensure a seamless experience every step of the way.
 </p>
       </div>

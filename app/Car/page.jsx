@@ -30,16 +30,15 @@ const Modal = ({ isOpen, onClose, car, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);  // Trigger the reserve action with form data
-    //onClose();           // Close the modal
+    onSubmit(formData);
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex text-black justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex text-black justify-center items-center overflow-y-auto">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl max-h-screen overflow-y-auto">
         <h2 className="text-2xl font-bold mb-4">{`Reserve ${car.name}`}</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <form onSubmit={handleSubmit} className="flex flex-col h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4 overflow-y-auto">
             <div>
               <label className="block font-bold mb-2">First Name</label>
               <input
@@ -88,8 +87,6 @@ const Modal = ({ isOpen, onClose, car, onSubmit }) => {
                 required
               />
             </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block font-bold mb-2">Start Date</label>
               <input
@@ -136,9 +133,20 @@ const Modal = ({ isOpen, onClose, car, onSubmit }) => {
             </div>
           </div>
 
-          <div className="flex justify-end">
-            <button type="button" onClick={onClose} className="bg-gray-400 text-white px-4 py-2 rounded-md mr-2">Cancel</button>
-            <button type="submit" className="bg-orange-600 text-white px-4 py-2 rounded-md">Reserve</button>
+          <div className="flex justify-end mt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="bg-gray-400 text-white px-4 py-2 rounded-md mr-2"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-orange-600 text-white px-4 py-2 rounded-md"
+            >
+              Reserve
+            </button>
           </div>
         </form>
       </div>

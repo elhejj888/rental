@@ -37,20 +37,18 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         {/* Mobile menu icon */}
         <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-700 px-4 py-2 rounded-full hover:text-gray-900 transition duration-300"
-          >
-            <FontAwesomeIcon icon={faBars} size="lg" />
-          </button>
+        <div className="text-2xl font-bold text-orange-600 shadow-sm">
+            <a href="/">Moussaid <span className="text-sm">Cars Rental</span></a>
+          </div>
         </div>
 
         {/* App Name (Center) */}
-        <div className="">
+        <div className="hidden md:block">
           <div className="text-2xl font-bold text-orange-600 shadow-sm">
-            <a href="/">Moussaid <span className='text-sm '>Cars Rental</span></a>
+            <a href="/">Moussaid <span className="text-sm">Cars Rental</span></a>
           </div>
         </div>
+
 
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-center space-x-4">
@@ -69,6 +67,7 @@ const Navbar = () => {
           <Link href="#contact">
             <p className="text-gray-700 hover:text-emerald-600">Contact Us</p>
           </Link>
+
         </div>
 
         {/* User Icon (Right) */}
@@ -117,11 +116,14 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <Link href="#carousel">
-            <button className="bg-orange-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-orange-800 font-bold transition duration-300">
-              Reserve
-            </button>
-          </Link>
+          <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-gray-700 px-4 py-2 rounded-full hover:text-gray-900 transition duration-300"
+          >
+            <FontAwesomeIcon icon={faBars} size="lg" />
+          </button>
+        </div>
         )}
       </div>
 
@@ -135,6 +137,9 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faTimes} size="lg" />
           </button>
           <div className="flex flex-col items-center mt-16">
+          <Link href="/Car">
+            <p onClick={handleLinkClick} className="py-2 text-gray-700 hover:text-emerald-600">Reserve</p>
+          </Link>
             <Link href="#mission">
               <p onClick={handleLinkClick} className="py-2 text-gray-700 hover:text-emerald-600">Mission</p>
             </Link>
@@ -150,6 +155,7 @@ const Navbar = () => {
             <Link href="#contact">
               <p onClick={handleLinkClick} className="py-2 text-gray-700 hover:text-emerald-600">Contact Us</p>
             </Link>
+
           </div>
         </div>
       )}

@@ -4,61 +4,63 @@ import React, { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-
-
 const CarCard = ({ car }) => (
-  <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden p-4 border-2 border-gray-200 ">
-    <img src={car.image} alt={car.name} className="h-40 w-full object-cover border-2 border-gray-100 rounded-md shadow-lg" />
+  <div className="bg-white text-black shadow-xl rounded-lg overflow-hidden p-4 border-2 border-gray-200 w-[300px] flex-shrink-0">
+    <div className="w-full h-60 flex items-center justify-center overflow-hidden border-2 border-gray-100 rounded-md shadow-lg">
+      <img
+        src={car.image}
+        alt={car.name}
+        className="w-full h-full object-contain"
+      />
+    </div>
     <div className="mt-4 flex shadow-xl py-4 px-2 border-2 border-gray-100 rounded-md">
-      <div className="w-1/2">
-        <h3 className="font-bold text-lg text-orange-600 border-b-2 border-gray-200">{car.name}</h3>
+      <div className="w-full">
+        <h3 className="font-bold w-fit text-orange-600 border-b-2 border-gray-200 text-lg">{car.name}</h3>
         <p className="text-gray-600">{car.price} MAD</p>
       </div>
     </div>
   </div>
 );
 
+
 const CarCarousel = () => {
   const carouselRef = useRef(null);
   const [isAtStart, setIsAtStart] = useState(true); // State to track if at the start
   const [isAtEnd, setIsAtEnd] = useState(false);    // State to track if at the end
-
   const [cars, setCars] = useState([]);
 
-const getData = async () => {
-  try {
-    const response = await axios.get('/api/cars');
-    setCars(response.data);
-  } catch (error) {
-    console.error('Error inserting car:', error);
-  }
-};
-useEffect(() => {
-  getData();
+  const getData = async () => {
+    try {
+      const response = await axios.get('/api/cars');
+      setCars(response.data);
+    } catch (error) {
+      console.error('Error fetching cars:', error);
+    }
+  };
 
-  // Set up an interval to call getData every 5 minutes (300,000 milliseconds)
-  const interval = setInterval(() => {
+  useEffect(() => {
     getData();
-  }, 300000); // 5 minutes in milliseconds
 
-  // Clean up the interval when the component unmounts
-  return () => clearInterval(interval);}
-, []);
-  // Auto-scroll the carousel
+    const interval = setInterval(() => {
+      getData();
+    }, 300000); // 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselRef.current && !isAtEnd) {
         carouselRef.current.scrollBy({
-          left: 300, // Adjust the scroll distance
+          left: 300,
           behavior: 'smooth',
         });
       }
-    }, 5000); // Auto-scroll every 3 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, [isAtEnd]);
 
-  // Update state based on scroll position
   const handleScroll = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
@@ -67,7 +69,6 @@ useEffect(() => {
     }
   };
 
-  // Scroll the carousel manually
   const handleNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
@@ -88,15 +89,14 @@ useEffect(() => {
 
   return (
     <div className="relative bg-white shadow-lg rounded-lg py-10 mx-auto w-full">
-      {/* Title */}
       <h2 className="text-4xl font-bold text-center text-black mb-8">Our Cars</h2>
 
-      {/* Carousel */}
       <div className="flex justify-center">
         <div
           ref={carouselRef}
           onScroll={handleScroll}
-          className="flex overflow-hidden w-[900px] space-x-4 no-scrollbar p-6 rouned-md"
+          className="flex overflow-hidden space-x-4 no-scrollbar p-6 rounded-md 
+            w-full sm:w-[300px] md:w-[600px] lg:w-[900px]"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {cars.map((car) => (
@@ -105,7 +105,6 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Arrow Buttons */}
       {!isAtStart && (
         <button
           onClick={handlePrev}
@@ -124,7 +123,6 @@ useEffect(() => {
         </button>
       )}
 
-      {/* Link to show all cars */}
       <div className="mt-8 text-center">
         <Link className="text-gray-600 font-bold hover:underline" href="/Car">
           Show All Cars
