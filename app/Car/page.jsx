@@ -161,7 +161,7 @@ const CarCard = ({ car, onReserve }) => (
     <div className="mt-4 flex shadow-xl py-4 px-2 border-2 border-gray-100 rounded-md">
       <div className="w-1/2">
         <h3 className="font-bold text-lg text-orange-600 border-b-2 border-gray-200">{car.name}</h3>
-        <p className="text-gray-600 font-bold">{car.price.toFixed(2).replace('.', ',')}€</p>
+        <p className="text-gray-600 font-bold">{car.price}€</p>
       </div>
       <div className="w-1/2 text-right">
         <button
