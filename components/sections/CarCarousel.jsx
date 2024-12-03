@@ -16,7 +16,7 @@ const CarCard = ({ car }) => (
     <div className="mt-4 flex shadow-xl py-4 px-2 border-2 border-gray-100 rounded-md">
       <div className="w-full">
         <h3 className="font-bold w-fit text-orange-600 border-b-2 border-gray-200 text-lg">{car.name}</h3>
-        <p className="text-gray-600">{car.price} MAD</p>
+        <p className="text-gray-600">{car.price} €</p>
       </div>
     </div>
   </div>
