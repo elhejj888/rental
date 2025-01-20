@@ -4,6 +4,8 @@ import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 import { format } from 'date-fns'; // You can use date-fns or another library like moment.js
 import NavAdmin from '../../components/layout/navAdmin';
+import Link from 'next/link';
+
 
 
 const ReservationsTable = () => {
@@ -31,8 +33,19 @@ const ReservationsTable = () => {
         { field: 'phoneNumber', headerName: 'Telephone', width: 150},
         { field: 'email', headerName: 'Email', width: 170},
         { field: 'date', headerName: 'Date', width: 150 },
-        { field: 'carType', headerName: 'Marque', width: 90 },
-        { field: 'carModel', headerName: 'Modele', width: 110 },
+        {
+            field: 'carId',
+            headerName: 'Car Id',
+            width: 120,
+            renderCell: (params) => (
+                <Link
+                    href={`/Car/${params.value}`}
+                    className="text-blue-500 underline hover:text-blue-700"
+                >
+                    {params.value}
+                </Link>
+            ),
+        },
         {
             field: 'dateFrom',
             headerName: 'Début',

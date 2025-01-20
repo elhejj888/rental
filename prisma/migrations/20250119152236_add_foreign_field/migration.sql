@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Reservation` MODIFY `carId` INTEGER NOT NULL DEFAULT 1;
