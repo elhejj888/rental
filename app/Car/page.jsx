@@ -115,7 +115,7 @@ const AllCarsPage = () => {
           <FaExclamationCircle className="text-red-500 mr-2" /> No Cars Available
         </p>
         <p className="text-lg text-gray-500 mb-6">
-          We're currently out of cars. Please check back later for availability.
+          We&apos;re currently out of cars. Please check back later for availability.
         </p>
         <div className="flex justify-center items-center">
           <Image
